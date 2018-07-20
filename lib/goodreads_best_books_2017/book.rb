@@ -17,10 +17,14 @@ class GoodreadsBestBooks2017::Book
     self.class.all<<self
   end
 
-  def self.new_from_index(book_url_array)
+  def self.new_from_array(book_url_array)
     book_url_array.each do |book|
-      self.new.tap{|b| self.url = book}
+      self.new.tap{|b| self.url = book_url_array}
     end
+  end
+
+  def add_attributes(attribute_hash)
+    attribute_hash.each {|key, value| self.send(("#{key}="), value)}
   end
 
 end

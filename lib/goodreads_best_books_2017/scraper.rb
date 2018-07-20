@@ -53,14 +53,19 @@ class GoodreadsBestBooks2017::Scraper
         published: profile.css("div#details div.row")[1].text.strip.gsub("\n","")
       }
     end
+    book_profile
   end
 
 
   def make_books(category)
-    #do I want the scraper to reset the book all variable?
-    GoodreadsBestBooks2017::Book.reset
-    scrape_books_index(category).each do |b|
-      GoodreadsBestBooks2017::Book.new_from_index(b)
+    GoodreadsBestBooks2017::Book.reset #do I want the scraper to reset the book all variable?
+
+    book_array = scrape_books_index(category)
+    GoodreadsBestBooks2017::Book.new_from_array(book_array)
+
+    GoodreadsBestBooks2017::Book.all.each do |book|
+      attributes = scrape_book_profile(book.url)
+      book.add_attributes(attributes)
     end
   end
 
