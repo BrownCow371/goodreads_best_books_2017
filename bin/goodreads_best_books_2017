@@ -1,0 +1,5 @@
+#!usr/bin/env ruby
+
+require_relative '../lib/goodreads_best_books_2017'
+
+GoodreadsBestBooks2017::CLI.new.call
