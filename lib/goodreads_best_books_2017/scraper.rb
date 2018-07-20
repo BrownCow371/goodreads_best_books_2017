@@ -44,14 +44,15 @@ class GoodreadsBestBooks2017::Scraper
 
     profile_scrape.each do |profile|
       book_profile = {
-        title: profile.css("h1#bookTitle").text.strip
-        author:
-        summary:
-        stars:
-        format:
-        pages:
-        published:
+        title: profile.css("h1#bookTitle").text.strip,
+        author: profile.css("a.authorName").text,
+        summary: "something",
+        stars: "something",
+        format: "soemthing",
+        pages: "something",
+        published: "soemthing"
       }
+    end
   end
 
 
