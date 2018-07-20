@@ -33,10 +33,25 @@ class GoodreadsBestBooks2017::Scraper
     book_index_array
   end
 
-  def scrape_book_profile
+  def scrape_book_profile(book_url)
     #book urls look like "/book/show/34273236-little-fires-everywhere?from_choice=true"
     #and the page I need to scrape looks like https://www.goodreads.com/book/show/34273236-little-fires-everywhere?from_choice=true
-    profie_scrape =
+    profie_scrape = Nokogiri::HTLM(open("https://www.goodreads.com#{book_url}")).css("div#metacol")
+
+    Nokogiri::HTML(open("https://www.goodreads.com/book/show/34273236-little-fires-everywhere?from_choice=true")).css("div#metacol")
+
+    book_profile = {}
+
+    profile_scrape.each do |profile|
+      book_profile = {
+        title: profile.css("h1#bookTitle").text.strip
+        author:
+        summary:
+        stars:
+        format:
+        pages:
+        published:
+      }
   end
 
 
