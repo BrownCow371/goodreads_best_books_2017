@@ -83,7 +83,10 @@ class GoodreadsBestBooks2017::CLI
     puts "Pages:           #{book.pages}"
     puts "Format:          #{book.book_format}"
     puts "Published:       #{book.published}"
-    puts "Summary:          #{book.summary}"
+    puts "URL:             https://www.goodreads.com#{book.url}"
+    puts "-----------------Summary:-----------------"
+    new_desc = book.desc.each_line(".") {|s| p s}
+    puts "#{new_desc} ..."
     puts "---------------Book Details---------------"
   end
 
