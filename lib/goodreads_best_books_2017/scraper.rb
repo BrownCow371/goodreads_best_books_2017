@@ -6,7 +6,6 @@ class GoodreadsBestBooks2017::Scraper
 
   def scrape_categories_index
     self.get_page_categories.css("div.categoryContainer div.category.clearFix")
-    binding.pry
   end
 
   def make_categories
@@ -21,7 +20,7 @@ class GoodreadsBestBooks2017::Scraper
     #want URL to be something like https://www.goodreads.com/choiceawards/best-fiction-books-2017
     #Nokogiri::HTML(open("https://www.goodreads.com/choiceawards/best-fiction-books-2017"))
     #and cateogry URLs are stored as /choiceawards/best-fiction-books-2017
-    Nokogiri::HTLM(open("https://www.goodreads.com#{category_url}"))
+    Nokogiri::HTML(open("https://www.goodreads.com#{category_url}"))
   end
 
   def scrape_books_index(category_url)
@@ -37,14 +36,15 @@ class GoodreadsBestBooks2017::Scraper
     #book urls look like "/book/show/34273236-little-fires-everywhere?from_choice=true"
     #and the page I need to scrape looks like https://www.goodreads.com/book/show/34273236-little-fires-everywhere?from_choice=true
     #Nokogiri::HTML(open("https://www.goodreads.com/book/show/34273236-little-fires-everywhere?from_choice=true")).css("div#metacol")
-    profie_scrape = Nokogiri::HTLM(open("https://www.goodreads.com#{book_url}")).css("div#metacol")
+
+    #summary: profile.css("div#description span p").text,
+    profile_scrape = Nokogiri::HTML(open("https://www.goodreads.com#{book_url}")).css("div#metacol")
     book_profile = {}
 
     profile_scrape.each do |profile|
       book_profile = {
         title: profile.css("h1#bookTitle").text.strip,
         author: profile.css("a.authorName").text,
-        summary: profile.css("div#description span p").text,
         stars: profile.css("span.value.rating span").text,
         book_format: profile.css("div#details div span[itemprop='bookFormat']").text,
         pages: profile.css("div#details div span[itemprop='numberOfPages']").text,

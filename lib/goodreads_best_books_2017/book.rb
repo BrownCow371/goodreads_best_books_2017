@@ -19,7 +19,7 @@ class GoodreadsBestBooks2017::Book
 
   def self.new_from_array(book_url_array)
     book_url_array.each do |book_url|
-      self.new.tap{|b| self.url = book_url}
+      self.new.tap{|b| b.url = book_url}
     end
   end
 

@@ -19,7 +19,7 @@ class GoodreadsBestBooks2017::CLI
 
     if input > 0 && input <= GoodreadsBestBooks2017::Category.all.length
       puts ""
-      puts "Pulling 'Best' list for the #{c} category."
+      puts "Pulling 'Best' list for the #{category.name} category."
 
       GoodreadsBestBooks2017::Scraper.new.make_books(category.url)
 
