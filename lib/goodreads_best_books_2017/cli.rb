@@ -10,7 +10,6 @@ class GoodreadsBestBooks2017::CLI
     puts ""
     puts "Which category of books would you like to see the 'best' list for?"
     puts "    - Please enter the category number from the list."
-    puts ""
     self.print_categories
 
     input = gets.strip.to_i
@@ -53,6 +52,7 @@ class GoodreadsBestBooks2017::CLI
   end
 
   def print_categories
+    puts ""
     puts "---------------Category List---------------"
     GoodreadsBestBooks2017::Category.all.each.with_index(1) do |c, i|
       puts "#{i}.   #{c}"
@@ -61,6 +61,7 @@ class GoodreadsBestBooks2017::CLI
   end
 
   def print_books_list #might need to take a category argument at some point
+    puts ""
     puts "---------------Book List---------------"
     GoodreadsBestBooks2017::Book.all.each.with_index(1) do |b,i|
       puts "#{i}.   #{b}"
@@ -86,7 +87,5 @@ class GoodreadsBestBooks2017::CLI
     #GoodreadsBestBooks2017::Book.reset
     self.list_pick_category
   end
-
-
 
 end

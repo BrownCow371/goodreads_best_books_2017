@@ -1,25 +1,44 @@
 class GoodreadsBestBooks2017::Scraper
 
   def get_page_categories
-
-    d = Nokogiri::HTML(open("https://www.goodreads.com/choiceawards/best-books-2017"))
-
+    Nokogiri::HTML(open("https://www.goodreads.com/choiceawards/best-books-2017"))
   end
 
   def scrape_categories_index
-    cat = self.get_page_categories.css("div.categoryContainer div.category.clearFix h4")
+    self.get_page_categories.css("div.categoryContainer div.category.clearFix")
     binding.pry
   end
 
   def make_categories
+    self.scrape_categories_index.each do |c|
+      name = c.css("h4").text
+      url = c.css("a").attribute("href").text
+      GoodreadsBestBooks2017::Category.new(name, url)
+    end
   end
 
   def get_page_books(category_url)
+    #want URL to be something like https://www.goodreads.com/choiceawards/best-fiction-books-2017
+    Nokogiri::HTML(open("https://www.goodreads.com/choiceawards/best-fiction-books-2017"))
+    #and cateogry URLs are stored as /choiceawards/best-fiction-books-2017
+    Nokogiri::HTLM(open("https://www.goodreads.com#{category_url}"))
   end
 
   def scrape_books_index(category)
-    self.get_page_books(category).css("stuff")
+    index_scrape = self.get_page_books(category).css("a.pollAnswer__bookLink")
+    book_index_array = []
+    index_scrape.each do |book|
+      book_index_array<<book.attribute("href").text
+    end
+    book_index_array
   end
+
+  def scrape_book_profile
+    #book urls look like "/book/show/34273236-little-fires-everywhere?from_choice=true"
+    #and the page I need to scrape looks like https://www.goodreads.com/book/show/34273236-little-fires-everywhere?from_choice=true
+    profie_scrape =
+  end
+
 
   def make_books(category)
     #do I want the scraper to reset the book all variable?

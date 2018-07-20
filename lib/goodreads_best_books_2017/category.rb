@@ -5,7 +5,9 @@ class GoodreadsBestBooks2017::Category
   #@@all =[]
   @@all = ["Fiction", "Romance", "Mystery", "Teen", "Science Fiction"]
 
-  def initialize
+  def initialize(name, url)
+    self.name = name
+    self.url = url
     self.class.all<<self
   end
 
