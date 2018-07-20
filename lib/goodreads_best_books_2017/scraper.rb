@@ -46,11 +46,11 @@ class GoodreadsBestBooks2017::Scraper
       book_profile = {
         title: profile.css("h1#bookTitle").text.strip,
         author: profile.css("a.authorName").text,
-        summary: "something",
-        stars: "something",
-        format: "soemthing",
-        pages: "something",
-        published: "soemthing"
+        summary: profile.css("div#description span p").text,
+        stars: profile.css("span.value.rating span").text,
+        format: profile.css("div#details div span[itemprop='bookFormat']").text,
+        pages: profile.css("div#details div span[itemprop='numberOfPages']").text,
+        published: profile.css("div#details div.row")[1].text.strip.gsub("\n","")
       }
     end
   end
