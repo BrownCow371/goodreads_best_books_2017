@@ -1,6 +1,7 @@
 class GoodreadsBestBooks2017::CLI
 
   def call
+    GoodreadsBestBooks2017::Scraper.new.make_categories
     puts ""
     puts "Welcome to the Best books of 2017!"
     self.list_pick_category
@@ -13,11 +14,14 @@ class GoodreadsBestBooks2017::CLI
     self.print_categories
 
     input = gets.strip.to_i
-    c = GoodreadsBestBooks2017::Category.all[input-1]
+
+    category = GoodreadsBestBooks2017::Category.all[input-1]
 
     if input > 0 && input <= GoodreadsBestBooks2017::Category.all.length
       puts ""
       puts "Pulling 'Best' list for the #{c} category."
+
+      GoodreadsBestBooks2017::Scraper.new.make_books(category.url)
 
       self.print_books_list
       self.list_pick_book
@@ -39,7 +43,8 @@ class GoodreadsBestBooks2017::CLI
     if input.downcase == 'back'
       self.back_to_category_list
     elsif input.to_i >0 && input.to_i <= GoodreadsBestBooks2017::Book.all.length
-      self.print_book_details
+      book =  GoodreadsBestBooks2017::Book.all[input.to_i-1]
+      self.print_book_details(book)
     else
       self.bad_answer
       self.list_pick_book
@@ -55,30 +60,30 @@ class GoodreadsBestBooks2017::CLI
     puts ""
     puts "---------------Category List---------------"
     GoodreadsBestBooks2017::Category.all.each.with_index(1) do |c, i|
-      puts "#{i}.   #{c}"
+      puts "#{i}.   #{c.name}"
     end
     puts "-------------------------------------------"
   end
 
-  def print_books_list #might need to take a category argument at some point
+  def print_books_list
     puts ""
     puts "---------------Book List---------------"
     GoodreadsBestBooks2017::Book.all.each.with_index(1) do |b,i|
-      puts "#{i}.   #{b}"
+      puts "#{i}.   #{b.title}"
       end
     puts "---------------------------------------"
   end
 
-  def print_book_details#eventually call on a book
+  def print_book_details(book)#eventually call on a book
     puts " "
     puts "---------------Book Details---------------"
-    puts "Title:           book.title"
-    puts "Author:          book.author"
-    puts "Stars:           book.stars"
-    puts "Pages:           book.pages"
-    puts "Format:          book.format"
-    puts "Published:       book.published"
-    puts "Summary:          book.summary"
+    puts "Title:           #{book.title}"
+    puts "Author:          #{book.author}"
+    puts "Stars:           #{book.stars}"
+    puts "Pages:           #{book.pages}"
+    puts "Format:          #{book.book_format}"
+    puts "Published:       #{book.published}"
+    puts "Summary:          #{book.summary}"
     puts "---------------Book Details---------------"
   end
 
