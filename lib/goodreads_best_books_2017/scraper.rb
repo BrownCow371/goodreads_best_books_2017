@@ -18,7 +18,7 @@ class GoodreadsBestBooks2017::Scraper
   end
 
   def scrape_books_index(category)
-    self.get_page_books(category).css(stuff)
+    self.get_page_books(category).css("stuff")
   end
 
   def make_books(category)
