@@ -1,6 +1,6 @@
 class GoodreadsBestBooks2017::Book
 
-  attr_accessor :title, :author, :desc, :stars, :book_format, :pages, :published, :url
+  attr_accessor :title, :author, :desc, :stars, :book_format, :pages, :published, :url, :title_author
 
   @@all = []
   #@@all = ["Book 1", "Book 2", "Book 3", "Book 4", "Book 5", "Book 6", "Book 7"]
@@ -13,14 +13,13 @@ class GoodreadsBestBooks2017::Book
     self.all.clear
   end
 
-  def initialize
+  def initialize(book_hash)
+    book_hash.each {|key, value| self.send(("#{key}="), value)}
     self.class.all<<self
   end
 
-  def self.new_from_array(book_url_array)
-    book_url_array.each do |book_url|
-      self.new.tap{|b| b.url = book_url}
-    end
+  def self.new_from_array(book_array)
+    book_array.each {|book_hash| self.new(book_hash)}
   end
 
   # def add_attributes(attribute_hash)

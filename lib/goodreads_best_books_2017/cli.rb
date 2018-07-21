@@ -106,7 +106,7 @@ class GoodreadsBestBooks2017::CLI
     puts ""
     puts "---------------Book List---------------"
     GoodreadsBestBooks2017::Book.all.each.with_index(1) do |b,i|
-      puts "#{i}.   #{b.title}"
+      puts "#{i}.   #{b.title_author}"
       end
     puts "---------------------------------------"
   end
