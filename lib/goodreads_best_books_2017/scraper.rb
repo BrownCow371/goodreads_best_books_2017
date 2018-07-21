@@ -28,6 +28,7 @@ class GoodreadsBestBooks2017::Scraper
     book_index_array = []
     self.get_page_books(category_url).each do |book|
       book_index_array<<book.attribute("href").text
+      puts "grabbed a book url"
     end
     book_index_array
   end
@@ -41,11 +42,10 @@ class GoodreadsBestBooks2017::Scraper
     # .css("div#description span")[0].text.gsub("â\u0080\u0094", "")
     profile_scrape = Nokogiri::HTML(open("https://www.goodreads.com#{book_url}")).css("div#metacol")
     book_profile = {}
-
-    profile_scrape.each do |profile|
-      summary =  profile.css("div#description span")[0].text.gsub("â\u0080\u0094", "") if profile.css("div#description span") != nil
+      profile_scrape.each do |profile|
+      summary =  profile.css("div#description span")[0].text.gsub("â\u0080\u0094", "") if profile.css("div#description span")[0] != nil
       book_profile = {
-        title: profile.css("h1#bookTitle").text.strip,
+        title: profile.css("h1#bookTitle").text.strip.gsub("\n","").gsub("                (", " ("),
         author: profile.css("a.authorName").text,
         stars: profile.css("span.value.rating span").text,
         book_format: profile.css("div#details div span[itemprop='bookFormat']").text,
@@ -53,7 +53,7 @@ class GoodreadsBestBooks2017::Scraper
         published: profile.css("div#details div.row")[1].text.strip.gsub("\n",""),
         desc: summary
       }
-      #binding.pry
+      puts "grabbing a profile"
     end
     book_profile
   end
