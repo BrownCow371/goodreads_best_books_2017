@@ -28,38 +28,36 @@ class GoodreadsBestBooks2017::Book
   # end
 
   def title
-    #         title: profile.css("h1#bookTitle").text.strip.gsub("\n","").gsub("                (", " ("),
-
+    @title ||= profile_scrape.css("h1#bookTitle").text.strip.gsub("\n","").gsub("                (", " (")
   end
 
   def author
-    #         author: profile.css("a.authorName").text,
-
+    @author ||= profile_scrape.css("a.authorName").text
   end
 
   def desc
-    #       summary =  profile.css("div#description span")[0].text.gsub("â\u0080\u0094", "") if profile.css("div#description span")[0] != nil
-
+    #this one may need work - test on Category 8 - humor. One of the books is missing a summary paragraph.
+    if profile_scrape.css("div#description span")[0] != nil
+      @desc ||= profile_scrape.css("div#description span")[0].text.gsub("â\u0080\u0094", "")
+    else
+      @desc ||= ""
+    end
   end
 
   def stars
-    #         stars: profile.css("span.value.rating span").text,
-
+    @stars ||= profile_scrape.css("span.value.rating span").text
   end
 
   def book_format
-    #         book_format: profile.css("div#details div span[itemprop='bookFormat']").text,
-
+    @book_format ||= profile_scrape.css("div#details div span[itemprop='bookFormat']").text
   end
 
   def pages
-    #         pages: profile.css("div#details div span[itemprop='numberOfPages']").text,
-
+    @pages ||= profile_scrape.css("div#details div span[itemprop='numberOfPages']").text
   end
 
   def published
-    #         published: profile.css("div#details div.row")[1].text.strip.gsub("\n",""),
-
+    @published ||= profile_scrape.css("div#details div.row")[1].text.strip.gsub("\n","")
   end
 
   def profile_scrape
