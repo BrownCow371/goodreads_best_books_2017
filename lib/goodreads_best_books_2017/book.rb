@@ -27,4 +27,18 @@ class GoodreadsBestBooks2017::Book
     attribute_hash.each {|key, value| self.send(("#{key}="), value)}
   end
 
+  #       summary =  profile.css("div#description span")[0].text.gsub("â\u0080\u0094", "") if profile.css("div#description span")[0] != nil
+  #       book_profile = {
+  #         title: profile.css("h1#bookTitle").text.strip.gsub("\n","").gsub("                (", " ("),
+  #         author: profile.css("a.authorName").text,
+  #         stars: profile.css("span.value.rating span").text,
+  #         book_format: profile.css("div#details div span[itemprop='bookFormat']").text,
+  #         pages: profile.css("div#details div span[itemprop='numberOfPages']").text,
+  #         published: profile.css("div#details div.row")[1].text.strip.gsub("\n",""),
+  #         desc: summary
+
+  def profile_scrape
+    @doc ||= Nokogiri::HTML(open("https://www.goodreads.com#{self.url}")).css("div#metacol")
+  end
+
 end
