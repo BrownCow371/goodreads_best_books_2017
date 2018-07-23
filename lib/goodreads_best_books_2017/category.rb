@@ -3,7 +3,6 @@ class GoodreadsBestBooks2017::Category
   attr_accessor :name, :url
 
   @@all =[]
-  #@@all = ["Fiction", "Romance", "Mystery", "Teen", "Science Fiction"]
 
   def initialize(name, url)
     self.name = name

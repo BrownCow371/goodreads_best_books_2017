@@ -105,13 +105,13 @@ class GoodreadsBestBooks2017::CLI
   def print_books_list
     puts ""
     puts "---------------Book List---------------"
-    GoodreadsBestBooks2017::Book.all.each.with_index(1) do |b,i|
+    GoodreadsBestBooks2017::Book.all.each.with_index(1) do |b, i|
       puts "#{i}.   #{b.title_author}"
       end
     puts "---------------------------------------"
   end
 
-  def print_book_details(book)#eventually call on a book
+  def print_book_details(book)
     puts " "
     puts "---------------Book Details---------------"
     puts "Title:           #{book.title}"
@@ -122,13 +122,11 @@ class GoodreadsBestBooks2017::CLI
     puts "Published:       #{book.published}"
     puts "URL:             https://www.goodreads.com#{book.url}"
     puts "-----------------Summary:-----------------"
-    #new_desc = book.desc.each_line(".") {|s| p s}
     puts "#{book.desc} ..."
     puts "---------------Book Details---------------"
   end
 
   def back_to_category_list
-    #will need to reset list of books
     GoodreadsBestBooks2017::Book.reset
     self.print_categories_list
     self.pick_a_category

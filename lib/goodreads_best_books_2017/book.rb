@@ -3,7 +3,6 @@ class GoodreadsBestBooks2017::Book
   attr_accessor :title, :author, :desc, :stars, :book_format, :pages, :published, :url, :title_author
 
   @@all = []
-  #@@all = ["Book 1", "Book 2", "Book 3", "Book 4", "Book 5", "Book 6", "Book 7"]
 
   def self.all
     @@all
@@ -21,10 +20,6 @@ class GoodreadsBestBooks2017::Book
   def self.new_from_array(book_array)
     book_array.each {|book_hash| self.new(book_hash)}
   end
-
-  # def add_attributes(attribute_hash)
-  #   attribute_hash.each {|key, value| self.send(("#{key}="), value)}
-  # end
 
   def title
     @title ||= profile_scrape.css("h1#bookTitle").text.strip.gsub("\n","").gsub("                (", " (")
