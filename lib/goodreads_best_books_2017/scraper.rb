@@ -34,6 +34,4 @@ class GoodreadsBestBooks2017::Scraper
     book_array = scrape_books_index(category_url)
     GoodreadsBestBooks2017::Book.new_from_array(book_array)
   end
-
-
 end

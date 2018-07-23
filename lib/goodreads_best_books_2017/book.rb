@@ -56,5 +56,4 @@ class GoodreadsBestBooks2017::Book
   def profile_scrape
     @doc ||= Nokogiri::HTML(open("https://www.goodreads.com#{self.url}")).css("div#metacol")
   end
-
 end

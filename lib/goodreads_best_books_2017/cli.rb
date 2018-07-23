@@ -131,5 +131,4 @@ class GoodreadsBestBooks2017::CLI
     self.print_categories_list
     self.pick_a_category
   end
-
 end
