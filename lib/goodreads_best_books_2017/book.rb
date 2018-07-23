@@ -30,7 +30,6 @@ class GoodreadsBestBooks2017::Book
   end
 
   def desc
-    #this one may need work - test on Category 8 - humor. One of the books is missing a summary paragraph.
     if profile_scrape.css("div#description span")[0] != nil
       @desc ||= profile_scrape.css("div#description span")[0].text.gsub("â\u0080\u0094", "")
     else

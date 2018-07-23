@@ -1,4 +1,3 @@
-require 'pry'
 class GoodreadsBestBooks2017::Scraper
 
   def get_page_categories
