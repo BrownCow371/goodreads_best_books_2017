@@ -13,4 +13,8 @@ class GoodreadsBestBooks2017::Category
   def self.all
     @@all
   end
+
+  def self.find_by_id(id)
+    @@all[id.to_i-1]
+  end
 end

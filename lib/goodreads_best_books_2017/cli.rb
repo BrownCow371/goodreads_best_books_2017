@@ -17,7 +17,7 @@ class GoodreadsBestBooks2017::CLI
     puts "    - or type 'Exit' to leave the application."
 
     input_category = gets.strip
-      category = GoodreadsBestBooks2017::Category.all[input_category.to_i-1]
+      category = GoodreadsBestBooks2017::Category.find_by_id(input_category)
       total_categories = GoodreadsBestBooks2017::Category.all.length
 
     if input_category.to_i.between?(1, total_categories)
@@ -54,7 +54,7 @@ class GoodreadsBestBooks2017::CLI
       self.goodbye
     elsif input_book.to_i.between?(1, GoodreadsBestBooks2017::Book.all.length)
 
-      book =  GoodreadsBestBooks2017::Book.all[input_book.to_i-1]
+      book =  GoodreadsBestBooks2017::Book.find_by_id(input_book)
 
       self.print_book_details(book)
 

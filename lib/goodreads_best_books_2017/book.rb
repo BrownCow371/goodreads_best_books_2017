@@ -21,6 +21,10 @@ class GoodreadsBestBooks2017::Book
     book_array.each {|book_hash| self.new(book_hash)}
   end
 
+  def self.find_by_id(id)
+    @@all[id.to_i-1]
+  end
+
   def title
     @title ||= profile_scrape.css("h1#bookTitle").text.strip.gsub("\n","").gsub("                (", " (")
   end
