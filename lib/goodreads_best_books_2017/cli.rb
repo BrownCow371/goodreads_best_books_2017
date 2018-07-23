@@ -16,11 +16,11 @@ class GoodreadsBestBooks2017::CLI
     puts "    - Please enter the category number from the list."
     puts "    - or type 'Exit' to leave the application."
 
-    input = gets.strip
-      category = GoodreadsBestBooks2017::Category.all[input.to_i-1]
+    input_category = gets.strip
+      category = GoodreadsBestBooks2017::Category.all[input_category.to_i-1]
       total_categories = GoodreadsBestBooks2017::Category.all.length
 
-    if input.to_i > 0 && input.to_i <= total_categories
+    if input_category.to_i.between?(1, total_categories)
       puts ""
       puts "Pulling the 'Best' list for the '#{category.name}' category."
 
@@ -29,7 +29,7 @@ class GoodreadsBestBooks2017::CLI
       self.print_books_list
       self.pick_a_book
 
-    elsif input.downcase == "exit"
+    elsif input_category.downcase == "exit"
       self.goodbye
 
     else
@@ -46,15 +46,15 @@ class GoodreadsBestBooks2017::CLI
     puts "    - 'Exit' to leave the application."
     puts ""
 
-    input = gets.strip
+    input_book = gets.strip
 
-    if input.downcase == 'back'
+    if input_book.downcase == 'back'
       self.back_to_category_list
-    elsif input.downcase == 'exit'
+    elsif input_book.downcase == 'exit'
       self.goodbye
-    elsif input.to_i >0 && input.to_i <= GoodreadsBestBooks2017::Book.all.length
+    elsif input_book.to_i.between?(1, GoodreadsBestBooks2017::Book.all.length)
 
-      book =  GoodreadsBestBooks2017::Book.all[input.to_i-1]
+      book =  GoodreadsBestBooks2017::Book.all[input_book.to_i-1]
 
       self.print_book_details(book)
 
@@ -64,13 +64,13 @@ class GoodreadsBestBooks2017::CLI
       puts "    -Enter 'Back' if you would like to pick a different Cateogry, or"
       puts "    -Enter 'Exit' if you would like to leave the application."
 
-      input2 = gets.strip.downcase
-        if input2 == "y"
+      input_another_book = gets.strip.downcase
+        if input_another_book == "y"
           self.print_books_list
           self.pick_a_book
-        elsif input2 =="exit"
+        elsif input_another_book =="exit"
           self.goodbye
-        elsif input2 == "back"
+        elsif input_another_book == "back"
           self.back_to_category_list
         else
           self.bad_answer
