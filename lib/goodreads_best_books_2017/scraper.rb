@@ -24,14 +24,11 @@ class GoodreadsBestBooks2017::Scraper
   end
 
   def scrape_books_index(category_url)
-    book_index_array = []
-    self.get_page_books(category_url).each do |book|
-      book_index_array<< {
-        url: book.attribute("href").text,
+    self.get_page_books(category_url).collect do |book|
+      { url: book.attribute("href").text,
         title_author: book.css("img").attribute("alt").text
       }
     end
-    book_index_array
   end
 
   def make_books(category_url)
