@@ -1,8 +1,6 @@
 # GoodreadsBestBooks2017
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/goodreads_best_books_2017`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This Ruby Gem providea a CLI to view the choice books from 2017 per Goodreads by category.
 
 ## Installation
 
@@ -22,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+type Ruby ./bin/goodreads_best_books_2017 at prompt
 
 ## Development
 
