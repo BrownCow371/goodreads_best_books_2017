@@ -8,10 +8,6 @@ class GoodreadsBestBooks2017::Book
     @@all
   end
 
-  # def self.reset
-  #   self.all.clear
-  # end
-
   def initialize(book_hash)
     book_hash.each {|key, value| self.send(("#{key}="), value)}
     self.class.all<<self
@@ -20,10 +16,6 @@ class GoodreadsBestBooks2017::Book
   def self.new_from_array(book_array)
     book_array.each {|book_hash| self.new(book_hash)}
   end
-
-  # def self.find_by_id(id)
-  #   @@all[id.to_i-1]
-  # end
 
   def self.find_by_category(category_url)
     self.all.collect {|b|  b if b.category_url == category_url}.compact
