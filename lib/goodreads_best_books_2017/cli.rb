@@ -42,7 +42,7 @@ class GoodreadsBestBooks2017::CLI
     input_book = ""
     while input_book.downcase != "exit"
       puts ""
-      puts "Which book would you like to see more details for?" if input_book == ""
+      puts "Which book would you like to see more details for?"
       puts "    - Please enter the book number from the list to see details, or"
       puts "    - Enter 'List' to reprint the Book list for this category, or"
       puts "    - Enter 'Back' to return to the Cateogry list, or"
@@ -113,7 +113,6 @@ class GoodreadsBestBooks2017::CLI
   end
 
   def back_to_category_list
-    #GoodreadsBestBooks2017::Book.reset
     self.print_categories_list
     self.pick_a_category
   end
