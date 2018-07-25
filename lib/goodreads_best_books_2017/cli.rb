@@ -59,7 +59,7 @@ class GoodreadsBestBooks2017::CLI
     elsif input_book.to_i.between?(1, GoodreadsBestBooks2017::Book.find_by_category(@category.url).length)
 
     #  book =  GoodreadsBestBooks2017::Book.find_by_id(input_book)
-      book = GoodreadsBestBooks2017::Book.find_by_category(@category.url)[input_book.to_i -1]
+      book = GoodreadsBestBooks2017::Book.find_by_category(@category.url)[input_book.to_i-1]
 
       self.print_book_details(book)
 
@@ -110,7 +110,7 @@ class GoodreadsBestBooks2017::CLI
   def print_books_list
     puts ""
     puts "---------------Book List---------------"
-    GoodreadsBestBooks2017::Book.all.each.with_index(1) do |b, i|
+    GoodreadsBestBooks2017::Book.find_by_category(@category.url).each.with_index(1) do |b, i|
       puts "#{i}.   #{b.title_author}"
       end
     puts "---------------------------------------"
