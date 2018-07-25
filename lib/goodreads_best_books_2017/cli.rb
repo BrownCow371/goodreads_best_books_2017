@@ -18,12 +18,13 @@ class GoodreadsBestBooks2017::CLI
 
     input_category = gets.strip
 
-      if input_category.to_i.between?(1, GoodreadsBestBooks2017::Category.all.length)
+    if input_category.to_i.between?(1, GoodreadsBestBooks2017::Category.all.length)
+
       @category = GoodreadsBestBooks2017::Category.find_by_id(input_category)
       puts ""
       puts "Pulling the 'Best' list for the '#{category.name}' category."
 
-      GoodreadsBestBooks2017::Scraper.make_books(category.url) if something
+      GoodreadsBestBooks2017::Scraper.make_books(category.url) if GoodreadsBestBooks2017::Book.find_by_category(category.url) = []
 
       self.print_books_list
       self.pick_a_book
