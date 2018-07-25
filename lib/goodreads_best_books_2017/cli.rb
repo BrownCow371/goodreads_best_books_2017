@@ -132,7 +132,7 @@ class GoodreadsBestBooks2017::CLI
   end
 
   def back_to_category_list
-    GoodreadsBestBooks2017::Book.reset
+    #GoodreadsBestBooks2017::Book.reset
     self.print_categories_list
     self.pick_a_category
   end

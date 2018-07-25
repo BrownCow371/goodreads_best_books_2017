@@ -8,9 +8,9 @@ class GoodreadsBestBooks2017::Book
     @@all
   end
 
-  def self.reset
-    self.all.clear
-  end
+  # def self.reset
+  #   self.all.clear
+  # end
 
   def initialize(book_hash)
     book_hash.each {|key, value| self.send(("#{key}="), value)}
