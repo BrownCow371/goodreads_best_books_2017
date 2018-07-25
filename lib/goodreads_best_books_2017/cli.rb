@@ -25,9 +25,6 @@ class GoodreadsBestBooks2017::CLI
       puts "Pulling the 'Best' list for the '#{@category.name}' category."
 
       GoodreadsBestBooks2017::Scraper.make_books(@category.url) if GoodreadsBestBooks2017::Book.find_by_category(@category.url) == []
-      #/choiceawards/best-fiction-books-2017
-      # GoodreadsBestBooks2017::Book.find_by_category("/choiceawards/best-fiction-books-2017")
-      # GoodreadsBestBooks2017::Scraper.make_books("/choiceawards/best-fiction-books-2017")
 
       self.print_books_list
       self.pick_a_book
@@ -42,49 +39,33 @@ class GoodreadsBestBooks2017::CLI
   end
 
   def pick_a_book
-    puts ""
-    puts "Which book would you like to see more details for?"
-    puts "    - Please enter the book number from the list, or"
-    puts "    - 'Back' to return to the Cateogry list, or"
-    puts "    - 'Exit' to leave the application."
-    puts ""
-# input_book = ""
-# while input_book != "exit" do
-    input_book = gets.strip
-
-    if input_book.downcase == 'back'
-      self.back_to_category_list
-    elsif input_book.downcase == 'exit'
-      self.goodbye
-    elsif input_book.to_i.between?(1, GoodreadsBestBooks2017::Book.find_by_category(@category.url).length)
-
-    #  book =  GoodreadsBestBooks2017::Book.find_by_id(input_book)
-      book = GoodreadsBestBooks2017::Book.find_by_category(@category.url)[input_book.to_i-1]
-
-      self.print_book_details(book)
-
+    input_book = ""
+    while input_book.downcase != "exit"
       puts ""
-      puts "Would you like to see details for another book in the current category?"
-      puts "    -Enter Y if you would like to pick another book from the list, or"
-      puts "    -Enter 'Back' if you would like to pick a different Cateogry, or"
-      puts "    -Enter 'Exit' if you would like to leave the application."
+      puts "Which book would you like to see more details for?" if input_book == ""
+      puts "    - Please enter the book number from the list to see details, or"
+      puts "    - Enter 'List' to reprint the Book list for this category, or"
+      puts "    - Enter 'Back' to return to the Cateogry list, or"
+      puts "    - Enter 'Exit' to leave the application."
+      puts ""
 
-      input_another_book = gets.strip.downcase
-        if input_another_book == "y"
-          self.print_books_list
-          self.pick_a_book
-        elsif input_another_book =="exit"
-          self.goodbye
-        elsif input_another_book == "back"
-          self.back_to_category_list
-        else
-          self.bad_answer
-          self.pick_a_book
-        end
-    else
-      self.bad_answer
-      self.pick_a_book
+      input_book = gets.strip
+
+      if input_book.downcase == 'back'
+        self.back_to_category_list
+      elsif input_book.to_i.between?(1, GoodreadsBestBooks2017::Book.find_by_category(@category.url).length)
+        book = GoodreadsBestBooks2017::Book.find_by_category(@category.url)[input_book.to_i-1]
+        self.print_book_details(book)
+        self.pick_a_book
+      elsif input_book.downcase == "list"
+        self.print_books_list
+        self.pick_a_book
+      elsif input_book.downcase != "exit"
+        self.bad_answer
+        self.pick_a_book
+      end
     end
+    self.goodbye
   end
 
   def goodbye
