@@ -26,7 +26,7 @@ class GoodreadsBestBooks2017::Book
   # end
 
   def self.find_by_category(category_url)
-    self.all.collect {|b|  b if b.category_url == category_url}
+    self.all.collect {|b|  b if b.category_url == category_url}.compact
   end
 
   def title
