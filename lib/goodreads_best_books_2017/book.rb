@@ -29,8 +29,6 @@ class GoodreadsBestBooks2017::Book
     self.all.collect {|b|  b if b.category_url == category_url}
   end
 
-  end
-
   def title
     @title ||= profile_scrape.css("h1#bookTitle").text.strip.gsub("\n","").gsub("                (", " (")
   end
