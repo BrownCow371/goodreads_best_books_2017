@@ -22,9 +22,9 @@ class GoodreadsBestBooks2017::CLI
 
       @category = GoodreadsBestBooks2017::Category.find_by_id(input_category)
       puts ""
-      puts "Pulling the 'Best' list for the '#{category.name}' category."
+      puts "Pulling the 'Best' list for the '#{@category.name}' category."
 
-      GoodreadsBestBooks2017::Scraper.make_books(category.url) if GoodreadsBestBooks2017::Book.find_by_category(category.url) == []
+      GoodreadsBestBooks2017::Scraper.make_books(@category.url) if GoodreadsBestBooks2017::Book.find_by_category(@category.url) == []
       #/choiceawards/best-fiction-books-2017
       # GoodreadsBestBooks2017::Book.find_by_category("/choiceawards/best-fiction-books-2017")
       # GoodreadsBestBooks2017::Scraper.make_books("/choiceawards/best-fiction-books-2017")
@@ -56,10 +56,10 @@ class GoodreadsBestBooks2017::CLI
       self.back_to_category_list
     elsif input_book.downcase == 'exit'
       self.goodbye
-    elsif input_book.to_i.between?(1, GoodreadsBestBooks2017::Book.find_by_category(@category.name).length)
+    elsif input_book.to_i.between?(1, GoodreadsBestBooks2017::Book.find_by_category(@category.url).length)
 
     #  book =  GoodreadsBestBooks2017::Book.find_by_id(input_book)
-      book = GoodreadsBestBooks2017::Book.find_by_category(category)[input_book.to_i -1]
+      book = GoodreadsBestBooks2017::Book.find_by_category(@category.url)[input_book.to_i -1]
 
       self.print_book_details(book)
 
