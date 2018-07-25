@@ -17,14 +17,13 @@ class GoodreadsBestBooks2017::CLI
     puts "    - or type 'Exit' to leave the application."
 
     input_category = gets.strip
-      category = GoodreadsBestBooks2017::Category.find_by_id(input_category)
-      total_categories = GoodreadsBestBooks2017::Category.all.length
 
-    if input_category.to_i.between?(1, total_categories)
+      if input_category.to_i.between?(1, GoodreadsBestBooks2017::Category.all.length)
+      @category = GoodreadsBestBooks2017::Category.find_by_id(input_category)
       puts ""
       puts "Pulling the 'Best' list for the '#{category.name}' category."
 
-      GoodreadsBestBooks2017::Scraper.new.make_books(category.url)
+      GoodreadsBestBooks2017::Scraper.make_books(category.url) if something
 
       self.print_books_list
       self.pick_a_book
@@ -45,16 +44,18 @@ class GoodreadsBestBooks2017::CLI
     puts "    - 'Back' to return to the Cateogry list, or"
     puts "    - 'Exit' to leave the application."
     puts ""
-
+input_book = ""
+while input_book != "exit" do
     input_book = gets.strip
 
     if input_book.downcase == 'back'
       self.back_to_category_list
     elsif input_book.downcase == 'exit'
       self.goodbye
-    elsif input_book.to_i.between?(1, GoodreadsBestBooks2017::Book.all.length)
+    elsif input_book.to_i.between?(1, GoodreadsBestBooks2017::Book.find_by_category(@category.name).length)
 
-      book =  GoodreadsBestBooks2017::Book.find_by_id(input_book)
+    #  book =  GoodreadsBestBooks2017::Book.find_by_id(input_book)
+      book = GoodreadsBestBooks2017::Book.find_by_category(category)[i.to_i -1]
 
       self.print_book_details(book)
 

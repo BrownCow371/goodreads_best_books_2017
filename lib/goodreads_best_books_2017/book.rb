@@ -1,6 +1,6 @@
 class GoodreadsBestBooks2017::Book
 
-  attr_accessor :title, :author, :desc, :stars, :book_format, :pages, :published, :url, :title_author
+  attr_accessor :title, :author, :desc, :stars, :book_format, :pages, :published, :url, :title_author, :category_url
 
   @@all = []
 
@@ -22,7 +22,12 @@ class GoodreadsBestBooks2017::Book
   end
 
   def self.find_by_id(id)
+
     @@all[id.to_i-1]
+  end
+
+  def self.find_by_category(category_url)
+    self.all.collect {|b| b.category_url == category_url}
   end
 
   def title
