@@ -1,7 +1,7 @@
 class GoodreadsBestBooks2017::CLI
 
   def call
-    GoodreadsBestBooks2017::Scraper.new.make_categories
+    GoodreadsBestBooks2017::Scraper.make_categories
     puts ""
     puts "Welcome to the Best books of 2017!"
     puts ""
